@@ -34,6 +34,27 @@ class Restaurant
     # return instances of restaurant
   end
 
+  def self.build_from_questions
+    args = {}
+    puts "Restaurant name: "
+    args[:name] = gets.chomp.strip
+
+    puts "Cusine name: "
+    args[:cusine] = gets.chomp.strip
+
+    puts "Avarage price: "
+    args[:price] = gets.chomp.strip
+
+    restaurant = self.new(args)
+    return restaurant;
+  end
+
+  def initialize(args={})
+    @name     = args[:name]   || ""
+    @cusine   = args[:cusine] || ""
+    @price    = args[:price]  || ""
+  end
+
   def save
     return false unless Restaurant.file_usable?
     File.open(@@filepath, 'a') do |file|
