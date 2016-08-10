@@ -1,5 +1,16 @@
+require 'restaurant'
 class Guide
+
   def initialize(path=nil)
+    Restaurant.filepath = path
+    if Restaurant.file_exists?
+      puts "Found restaurant file."
+    elsif Restaurant.create_file
+      puts "Created restaurant file."
+    else
+      puts "Exiting. \n\n\n"
+      exit!
+    end
 
 
   end
