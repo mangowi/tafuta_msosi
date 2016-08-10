@@ -61,48 +61,49 @@ class Guide
     end
   end
 
-  def find(keyword="")
-    output_action_header("Find a restaurant")
-    if keyword
-      restaurants = Restaurant.saved_restaurants
-      found = restaurants.select do |rest|
-        rest.name.downcase.include?(keyword.downcase) || rest.cuisine.downcase.include?(keyword.downcase)
-        rest.price.to_i <=keyword.to_i
-      end
-      output_restaurant_table(found)
-    else
-      puts "Find using a key word phase to search the restaurant list."
-      puts "Example: 'find mangowi, 'find mamantilie'\n\n"
-    end
-  end
-
   def list
     output_action_header("Listing restaurants")
     restaurants = Restaurant.saved_restaurants
     output_restaurant_table(restaurants)
   end
 
+  def find(keyword="")
+    output_action_header("Find a restaurant")
+    if keyword
+      restaurants = Restaurant.saved_restaurants
+      found = restaurants.select do |rest|
+        rest.name.downcase.include?(keyword.downcase) ||
+            rest.cuisine.downcase.include?(keyword.downcase) ||
+            rest.price.to_i <= keyword.to_i
+      end
+      output_restaurant_table(found)
+    else
+      puts "Find using a key phrase to search the restaurant list."
+      puts "Examples: 'find tamale', 'find Mexican', 'find mex'\n\n"
+    end
+  end
+
   def add
     output_action_header("Add a restaurant")
-    restaurant = Restaurant.build_from_questions
+    restaurant = Restaurant.build_using_questions
     if restaurant.save
       puts "\nRestaurant Added\n\n"
     else
       puts "\nSave Error: Restaurant not added\n\n"
     end
-
   end
 
   def introduction
-    puts "\n\n<<< Welcome to Tafuta Msosi >>>\n\n"
+    puts "\n\n<<< Welcome to Tafuat Msosi >>>\n\n"
     puts "This is an interactive guide to help you find the food you crave.\n\n"
   end
 
   def conclusion
-    puts "\n<<< Karibu, Goodbye and Bon Appetit! >>>\n\n\n"
+    puts "\n<<<  Karibu tena, Goodbye and Bon Appetit! >>>\n\n\n"
   end
 
   private
+
   def output_action_header(text)
     puts "\n#{text.upcase.center(60)}\n\n"
   end

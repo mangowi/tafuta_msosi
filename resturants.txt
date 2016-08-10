@@ -2,3 +2,4 @@ Daniel	Tanzania	40
 Mangowi	Denmark	90
 New one	Another cusine	92
 		
+Mama moja	adad	80
